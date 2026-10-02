@@ -1,0 +1,70 @@
+table Dim_Customers
+	lineageTag: 751822d8-1a21-4acb-9d88-065bb494e281
+
+	column 'Customer ID'
+		dataType: string
+		isKey
+		lineageTag: a9d1cc79-5e48-4386-8b9c-bf0750a408fa
+		summarizeBy: none
+		sourceColumn: Customer ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Tier'
+		dataType: string
+		lineageTag: 46be01ad-4f27-4061-bb38-c4d36b83a2f4
+		summarizeBy: none
+		sourceColumn: Product Tier
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Plan Type'
+		dataType: string
+		lineageTag: c2943c7b-c10d-417b-8434-a4b1487583a5
+		summarizeBy: none
+		sourceColumn: Plan Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Paperless Billing'
+		dataType: string
+		lineageTag: 7251f2e0-ef42-460a-834f-791d9a6684bc
+		summarizeBy: none
+		sourceColumn: Paperless Billing
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Payment Method'
+		dataType: string
+		lineageTag: 6b0150fa-61fe-4d30-b22a-e120c101f3cc
+		summarizeBy: none
+		sourceColumn: Payment Method
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tenure Bucket Sort'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b32a8dfe-ce02-4465-8455-6d8feeec545a
+		summarizeBy: none
+		sourceColumn: tenure Bucket Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Customers = m
+		mode: import
+		source =
+				let
+				    Source = Fact_Subscriptions,
+				    #"Removed Columns" = Table.RemoveColumns(Source,{"Subscription Start Date", "Start Month-Year", "Year", "Tenure Months", "MRR", "Total Revenue", "Churned", "Feature Adoption Count", "Churn Flag", "Tenure Bucket"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Columns", {"Customer ID"})
+				in
+				    #"Removed Duplicates"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

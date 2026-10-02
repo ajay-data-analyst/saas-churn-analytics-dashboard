@@ -1,0 +1,103 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "62fe1e89ad8a1401b5bf",
+  "displayName": "Overview",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          },
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#0D1117'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspace": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#080C12'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "2f3e9a9fb445df4644cc",
+      "target": "7ff9413824b4ae4b25da",
+      "type": "DataFilter"
+    },
+    {
+      "source": "2f3e9a9fb445df4644cc",
+      "target": "1bf04267069b4e0e0ab0",
+      "type": "DataFilter"
+    },
+    {
+      "source": "2f3e9a9fb445df4644cc",
+      "target": "ddf1c5af57eb4ec8e5a6",
+      "type": "DataFilter"
+    },
+    {
+      "source": "1bf04267069b4e0e0ab0",
+      "target": "2f3e9a9fb445df4644cc",
+      "type": "DataFilter"
+    },
+    {
+      "source": "ac4dd0a4183b002b5220",
+      "target": "2f3e9a9fb445df4644cc",
+      "type": "DataFilter"
+    },
+    {
+      "source": "ac4dd0a4183b002b5220",
+      "target": "7ff9413824b4ae4b25da",
+      "type": "DataFilter"
+    },
+    {
+      "source": "ac4dd0a4183b002b5220",
+      "target": "ddf1c5af57eb4ec8e5a6",
+      "type": "DataFilter"
+    },
+    {
+      "source": "7ff9413824b4ae4b25da",
+      "target": "2f3e9a9fb445df4644cc",
+      "type": "DataFilter"
+    },
+    {
+      "source": "7ff9413824b4ae4b25da",
+      "target": "1bf04267069b4e0e0ab0",
+      "type": "DataFilter"
+    },
+    {
+      "source": "7ff9413824b4ae4b25da",
+      "target": "ddf1c5af57eb4ec8e5a6",
+      "type": "DataFilter"
+    }
+  ]
+}

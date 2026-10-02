@@ -1,0 +1,8 @@
+relationship a5b77623-fae4-1e10-9fcd-71bdc8e3fb7a
+	fromColumn: Fact_Subscriptions.'Subscription Start Date'
+	toColumn: Dim_Date.Date
+
+relationship 6b8353f1-a182-2277-2ba5-739e8a9e0202
+	fromColumn: Fact_Subscriptions.'Customer ID'
+	toColumn: Dim_Customers.'Customer ID'
+

@@ -1,0 +1,1228 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "Churn View -  Revenue",
+  "name": "d89b961e30b1a78c69e3",
+  "options": {
+    "targetVisualNames": [
+      "e350f2b74d9be7b3d330"
+    ]
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "2d7a5d70dbc88fec56ce",
+    "sections": {
+      "2d7a5d70dbc88fec56ce": {
+        "visualContainers": {
+          "702d45e282671b80d1ce": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "0c706da113efaf8e4a57": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "1f7638940fd7b63e8ca4": {
+            "singleVisual": {
+              "visualType": "pageNavigator",
+              "objects": {}
+            }
+          },
+          "514c171324bee58ab488": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "6a285272ac8246c42923": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "2ad43f20b0e7b678090a",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Churned Customers"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Churned Customers"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "230b20282ee185a72c78": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "64016da303847cb0b32d",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "High Risk Customers"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "High Risk Customers"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "16c73341350dbca4b78b": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "998b29385a2d03a04909",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Revenue Churn Rate"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Revenue Churn Rate"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "bcce72a67861788b4fe5": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "2af8fbb80663180a073e",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dim_Customers"
+                        }
+                      },
+                      "Property": "Plan Type"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Basic'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dim_Customers"
+                        }
+                      },
+                      "Property": "Plan Type"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "ff933fc824f11e460f20": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "52e3eaea732ebd56db96",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dim_Customers"
+                        }
+                      },
+                      "Property": "Product Tier"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Basic'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dim_Customers"
+                        }
+                      },
+                      "Property": "Product Tier"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "f319699925d596bf76c3": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "436263fc2edcfd02adb9": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "15f3af3ad8a8422b028c",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dim_Customers"
+                        }
+                      },
+                      "Property": "Plan Type"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "fb24db96b0a460c56da5",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Churn Rate"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "3162d4049a0a62d93724",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Churned Customers"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "a1ecc8de810e7b68012a",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Churned MRR"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "bbf93756bd755c3d9bcd",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Revenue Churn Rate"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "703acb805bb0c4ee9056",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Active Customers"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredBarChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Churn Rate"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dim_Customers"
+                        }
+                      },
+                      "Property": "Plan Type"
+                    }
+                  }
+                ]
+              },
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "f03b267f7bbd3f6b9cbc": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "824d4e30b2db5ed61a9c",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Fact_Subscriptions"
+                        }
+                      },
+                      "Property": "Payment Method"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "6b5c47956abc360904d9",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Churn Rate"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "1330c264d8d508bacb61",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Churned Customers"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "25e9d122d4d50dd500da",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Total Customers"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredBarChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Churn Rate"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Fact_Subscriptions"
+                        }
+                      },
+                      "Property": "Payment Method"
+                    }
+                  }
+                ]
+              },
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "2c53accfc7041aabb53c": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "cb7d38333175c1bc44ea",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dim_Customers"
+                        }
+                      },
+                      "Property": "Product Tier"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "d0a4c0f35e6a6e5b49ad",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Churn Rate"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "e01a89cc4b2359a29300",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Churned Customers"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "3e408c77ad8e414b8eba",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "ARPU"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "372559339e142d76e611",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Customer LTV"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredBarChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Churn Rate"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dim_Customers"
+                        }
+                      },
+                      "Property": "Product Tier"
+                    }
+                  }
+                ]
+              },
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "d037b6d505df79ad5e4b": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "343691648d50b6a7e6d1",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Fact_Subscriptions"
+                        }
+                      },
+                      "Property": "Tenure Bucket"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "c01cfa200e7306b26ce6",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Churn Rate"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "0205fa72735838200769",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Churned Customers"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "5a60ebdec6c31b065037",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Total Customers"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "3431fe505220847e15c7",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Avg Customer Lifetime Months"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredBarChart",
+              "objects": {},
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Fact_Subscriptions"
+                        }
+                      },
+                      "Property": "Tenure Bucket"
+                    }
+                  }
+                ]
+              },
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "41efa2f09261f24aa666": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "0df90e90786b91ae0025",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Churn Rate"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Churn Rate"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "309f0fc89d8d3dcb85ec": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "c2352994781c04e96a28": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "4db775d65415b809e9e4": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "0f4e835a8800246ce8b0",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dim_Customers"
+                        }
+                      },
+                      "Property": "Plan Type"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "13a96c0683529c710c44",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Churned Customers"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "8aaa983ad77a920ce0cb",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Churned MRR"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "844c02fe834e458b8210",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Revenue Churn Rate"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "fba081fb7a9e68856bee",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Active Customers"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredBarChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Revenue Churn Rate"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dim_Customers"
+                        }
+                      },
+                      "Property": "Plan Type"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "21b34b17bfa973f2d0ec": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "3d48758bbedba8700ba0",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Fact_Subscriptions"
+                        }
+                      },
+                      "Property": "Payment Method"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "747b553164ada8e4eb16",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Churned Customers"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "9dc88e7059e113585077",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Total Customers"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "5d0f4a17123720ebba92",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Revenue Churn Rate"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredBarChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Revenue Churn Rate"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Fact_Subscriptions"
+                        }
+                      },
+                      "Property": "Payment Method"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "ac6c7c31d13936d3ef5e": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "b33568a5464e76b55303",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dim_Customers"
+                        }
+                      },
+                      "Property": "Product Tier"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "3e6b03dfc7a803eee0a8",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Churned Customers"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "583cc41bc065d9eed16e",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "ARPU"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "2aacdae328db8d9dcc2c",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Customer LTV"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "aa59aa01ea28050810ce",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Revenue Churn Rate"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredBarChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Revenue Churn Rate"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dim_Customers"
+                        }
+                      },
+                      "Property": "Product Tier"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "2958cefce42e3dda31c0": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "7332ca308dadce942784",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Fact_Subscriptions"
+                        }
+                      },
+                      "Property": "Tenure Bucket"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "cbe49ad4c0a8ca372eb7",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Churned Customers"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "e4e6d67e1b5010119c33",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Total Customers"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "c72d8cef1e06bdd2793e",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Avg Customer Lifetime Months"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "dfcf25909415c54a9695",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Revenue Churn Rate"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredBarChart",
+              "objects": {},
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Fact_Subscriptions"
+                        }
+                      },
+                      "Property": "Tenure Bucket"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

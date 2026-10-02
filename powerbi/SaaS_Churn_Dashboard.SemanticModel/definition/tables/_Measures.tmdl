@@ -1,0 +1,490 @@
+table _Measures
+	lineageTag: 228a6665-6228-43a0-9366-112cc0b4421f
+
+	/// Total Monthly Recurring Revenue: Sum of all subscription MRR values
+	measure 'Total MRR' =
+			
+			SUM ( Fact_Subscriptions[MRR] )
+		formatString: \$#,0.00
+		displayFolder: Revenue
+		lineageTag: 0dfc026d-36f2-442e-ac6d-f6f9f01120b2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Total Annual Recurring Revenue: 12x Total MRR
+	measure 'Total ARR' =
+			
+			[Total MRR] * 12
+		formatString: \$#,0.00
+		displayFolder: Revenue
+		lineageTag: 4d972a50-4610-42b8-9cb0-d059082f7ed6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Customers' =
+			
+			COUNTROWS ( Fact_Subscriptions )
+		formatString: #,0
+		displayFolder: Customers
+		lineageTag: fd9bc632-845f-4387-9128-faf3a6a9ef70
+
+	/// Churned Customers: Number of customers who stopped subscribing during the period
+	measure 'Churned Customers' =
+			
+			SUM ( Fact_Subscriptions[Churn Flag] )
+		formatString: #,0
+		displayFolder: Customers
+		lineageTag: bce77cd2-9891-4ef1-a328-ac20b974c72b
+
+	/// Active Customers: Number of customers still subscribed (Total - Churned)
+	measure 'Active Customers' =
+			
+			[Total Customers] - [Churned Customers]
+		formatString: #,0
+		displayFolder: Customers
+		lineageTag: 9492b147-0a83-4389-a8cc-ea621fed1316
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	/// Churned MRR: MRR from customers who have churned
+	measure 'Churned MRR' =
+			
+			CALCULATE (
+			    SUM ( Fact_Subscriptions[MRR] ),
+			    Fact_Subscriptions[Churn Flag] = 1
+			)
+		formatString: \$#,0.00
+		displayFolder: Revenue
+		lineageTag: e17b79d5-ff44-42fd-9089-a26d62779278
+
+	/// Active MRR: MRR from customers who are still subscribed
+	measure 'Active MRR' =
+			
+			CALCULATE (
+			    SUM ( Fact_Subscriptions[MRR] ),
+			    Fact_Subscriptions[Churn Flag] = 0
+			)
+		formatString: \$#,0.00
+		displayFolder: Revenue
+		lineageTag: 7cc72a8b-2322-4021-8abb-b36e9b8fe8f1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Churn Rate: Percentage of customers who stopped subscribing during the period
+	measure 'Churn Rate' =
+			
+			DIVIDE (
+			    [Churned Customers],
+			    [Total Customers],
+			    0
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Rates
+		lineageTag: efb9a90e-0573-4f15-bd3f-8626bf79650e
+
+	/// Retention Rate: Percentage of customers who remained subscribed during the period
+	measure 'Retention Rate' =
+			
+			1 - [Churn Rate]
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Rates
+		lineageTag: 86fba4b2-c84f-4d05-ba9e-1e1989547462
+
+	/// Revenue Churn Rate: Churned MRR divided by Total MRR
+	measure 'Revenue Churn Rate' =
+			
+			DIVIDE (
+			    [Churned MRR],
+			    [Total MRR],
+			    0
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Rates
+		lineageTag: 3d34bc9f-771a-4548-a3cf-b8b78069db6a
+
+	/// Average Revenue Per User: Total MRR divided by Total Customers
+	measure ARPU =
+			
+			DIVIDE (
+			    [Total MRR],
+			    [Total Customers],
+			    0
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Revenue
+		lineageTag: c6d5f1cf-5b16-492f-984d-339db17f99c4
+
+	/// Average Revenue Per Active User: Active MRR divided by Active Customers
+	measure 'ARPU Active' =
+			
+			DIVIDE (
+			    [Active MRR],
+			    [Active Customers],
+			    0
+			)
+		displayFolder: Revenue
+		lineageTag: 809d1ec1-c01f-4b03-b9fe-9a0956594ab3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Cohort MRR Momentum: Current-cohort MRR net of all churned MRR, relative to prior month's start-cohort MRR. Not true NRR: expansion/contraction cannot be computed from snapshot data.
+	measure 'Cohort MRR Momentum' =
+			
+			// Cohort MRR Momentum = Current MRR net of churned MRR / prior month start-cohort MRR
+			// Not true NRR: the dataset is a single snapshot, so expansion/contraction
+			// cannot be computed. Retained under an accurate name.
+			VAR PriorMRR = [MRR Previous Month]
+			VAR CurrentMRR = [Total MRR]
+			VAR RevenueExpansion = [Total MRR] - [Churned MRR]
+			RETURN
+			    IF (PriorMRR > 0, DIVIDE (RevenueExpansion, PriorMRR, 0), BLANK ())
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Rates
+		lineageTag: 4b414139-403a-4654-abf6-755b3815b9d3
+
+	/// Total Lifetime Revenue: Sum of all customer lifetime revenue
+	measure 'Total Lifetime Revenue' =
+			
+			SUM ( Fact_Subscriptions[Total Revenue] )
+		formatString: \$#,0.00
+		displayFolder: Revenue
+		lineageTag: 058a46da-1a46-48af-aeee-b871aaa4fa77
+
+	/// Avg Tenure Months: Average number of months customers have been subscribed (current tenure)
+	measure 'Avg Tenure Months' =
+			
+			AVERAGE ( Fact_Subscriptions[Tenure Months] )
+		displayFolder: LTV
+		lineageTag: 1e4caf7b-2c75-49d0-a58c-0f1208b05abc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Avg Tenure Months - Churned: Average tenure (months) of customers who churned
+	measure 'Avg Tenure Months - Churned' =
+			
+			CALCULATE (
+			    AVERAGE ( Fact_Subscriptions[Tenure Months] ),
+			    Fact_Subscriptions[Churn Flag] = 1
+			)
+		displayFolder: LTV
+		lineageTag: 294982b2-900d-4181-8475-0a0b692a8322
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Avg Realized Revenue per Customer: Average total lifetime revenue actually recorded per customer (snapshot metric, not predictive LTV)
+	measure 'Avg Realized Revenue per Customer' =
+			
+			// Avg Realized Revenue per Customer: average Total Revenue per customer
+			// Transparent realized-revenue basis: Total Revenue = MRR x tenure months, recorded in the snapshot
+			AVERAGE ( Fact_Subscriptions[Total Revenue] )
+		formatString: \$#,0.00
+		displayFolder: LTV
+		lineageTag: 4a49eb3f-326e-4470-94e8-236fd734ce15
+
+	/// Avg Realized Revenue - Churned: Average realized revenue of churned customers (same basis as Avg Realized Revenue per Customer)
+	measure 'Avg Realized Revenue - Churned' =
+			
+			// Avg Realized Revenue - Churned: average realized revenue of customers who churned
+			CALCULATE (
+			    AVERAGE ( Fact_Subscriptions[Total Revenue] ),
+			    Fact_Subscriptions[Churn Flag] = 1
+			)
+		formatString: \$#,0.00
+		displayFolder: LTV
+		lineageTag: ae19653e-9f71-43fd-bbb3-0572d127e857
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Average Feature Adoption: Average number of features adopted by customers
+	measure 'Avg Feature Adoption' =
+			
+			AVERAGE ( Fact_Subscriptions[Feature Adoption Count] )
+		displayFolder: Feature Adoption
+		lineageTag: ba6d2401-21da-4c21-9d64-d1406cc0384a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Average Feature Adoption Churned: Average feature adoption of churned customers
+	measure 'Avg Feature Adoption Churned' =
+			
+			CALCULATE (
+			    AVERAGE ( Fact_Subscriptions[Feature Adoption Count] ),
+			    Fact_Subscriptions[Churn Flag] = 1
+			)
+		displayFolder: Feature Adoption
+		lineageTag: 953fea17-9267-49d6-962d-444f7da1d1f8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// New Business MRR - Prior Cohort Month: MRR from customers whose subscriptions started in the previous calendar month (start-cohort basis, not total business MRR).
+	measure 'MRR Previous Month' = ```
+			
+			VAR PrevMRR = 
+			    CALCULATE (
+			        [Total MRR],
+			        DATEADD ( Dim_Date[Date], -1, MONTH )
+			    )
+			RETURN
+			    IF ( ISBLANK ( PrevMRR ), BLANK(), PrevMRR )
+			```
+		formatString: \$#,0.00
+		displayFolder: Time Intelligence
+		lineageTag: 0bed7c55-76d9-45a5-8acb-f42df6d00adf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// New Cohort MRR MoM Change: Percentage change in start-cohort MRR between the current month and the previous start-cohort month. Not total business MRR growth.
+	measure 'MoM Growth +' =
+			
+			DIVIDE (
+			    [Total MRR] - [MRR Previous Month],
+			    [MRR Previous Month],
+			    0
+			)
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Time Intelligence
+		lineageTag: af472f2d-aa87-449c-a75d-1620cc68e7f7
+
+	/// New Business MRR - Same Month Last Year (New Cohort): MRR from customers whose subscriptions started in the same calendar month of the prior year. Start-cohort basis, not total business MRR.
+	measure 'MRR SPLY' = ```
+			
+			VAR SPLY = 
+			    CALCULATE (
+			        [Total MRR],
+			        SAMEPERIODLASTYEAR ( Dim_Date[Date] )
+			    )
+			RETURN
+			    IF ( ISBLANK ( SPLY ), BLANK(), SPLY )
+			```
+		formatString: \$#,0.00
+		displayFolder: Time Intelligence
+		lineageTag: 10d37d7c-af8a-4a93-80f4-93414ce7e228
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// New Cohort MRR YoY Change: Percentage change in start-cohort MRR compared to the same month last year (start-cohort basis). Not total business MRR YoY growth.
+	measure 'YoY Growth +' =
+			
+			DIVIDE (
+			    [Total MRR] - [MRR SPLY],
+			    [MRR SPLY],
+			    0
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Time Intelligence
+		lineageTag: e5720d82-5149-400f-a416-37b07e4db57b
+
+	/// New Business MRR - Trailing 12M (Sum): Trailing 12-month sum of start-cohort MRR by subscription start date. Not a moving average.
+	measure 'Rolling 12M MRR' = ```
+			
+			VAR LastDateInContext = LASTDATE ( Dim_Date[Date] )
+			VAR DateRange = 
+			    DATESINPERIOD (
+			        Dim_Date[Date],
+			        LastDateInContext,
+			        -12,
+			        MONTH
+			    )
+			RETURN
+			    CALCULATE ( [Total MRR], DateRange )
+			```
+		formatString: \$#,0.00
+		displayFolder: Revenue
+		lineageTag: 02d6ef17-5099-490a-8775-da430bf5900e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Cohort Churn Rate - Previous Month: Churn rate of the previous month's start-cohort customers (start-cohort basis, not total business churn rate previous month).
+	measure 'Churn Rate Previous Month' =
+			
+			CALCULATE (
+			    [Churn Rate],
+			    DATEADD ( Dim_Date[Date], -1, MONTH )
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Time Intelligence
+		lineageTag: 78af51de-2bcc-4452-8258-ddc538aa9c54
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Cohort Churn Rate Change MoM: Difference in cohort churn rate compared to previous month's start-cohort churn rate (start-cohort basis, not total business churn change).
+	measure 'Churn Rate Change MoM' =
+			
+			[Churn Rate] - [Churn Rate Previous Month]
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Time Intelligence
+		lineageTag: 0e488ff5-5fee-499d-a9a3-a34097cadca1
+
+	/// New Business MRR YTD: Cumulative start-cohort MRR from the start of the current calendar year (not total business MRR YTD).
+	measure 'MRR YTD' =
+			
+			TOTALYTD (
+			    [Total MRR],
+			    Dim_Date[Date]
+			)
+		formatString: \$#,0.00
+		displayFolder: Revenue
+		lineageTag: 9091ab1c-8dfe-476a-8e79-605887003997
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Cumulative New Business MRR: Cumulative start-cohort MRR from the beginning of the selected date range (not total business MRR cumulative).
+	measure 'Running Total MRR' =
+			
+			CALCULATE (
+			    [Total MRR],
+			    FILTER (
+			        ALL ( Dim_Date ),
+			        Dim_Date[Date] <= MAX ( Dim_Date[Date] )
+			    )
+			)
+		formatString: \$#,0.00
+		displayFolder: Revenue
+		lineageTag: 32aa434f-c267-43ab-a0e6-da6bb085821a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Churn Rate Color: Color to use for churn rate visualization
+	measure 'Churn Rate Color' =
+			
+			SWITCH (
+			    TRUE(),
+			    [Churn Rate] >= 0.25, "#C0392B",
+			    [Churn Rate] >= 0.15, "#E67E22",
+			    "#27AE60"
+			)
+		displayFolder: Visual Formatting
+		lineageTag: 085a2b5d-2b19-4543-bff1-c3a880898f8c
+
+	/// MoM Growth Color: Color to use for month-over-month growth visualization
+	measure 'MoM Growth Color' =
+			
+			IF ( [MoM Growth +] >= 0, "#27AE60", "#C0392B" )
+		displayFolder: Visual Formatting
+		lineageTag: 9b372a0e-f23d-4a44-91f2-a2103f731664
+
+	/// Churn Change Color: Color to use for churn change visualization
+	measure 'Churn Change Color' =
+			
+			IF ( [Churn Rate Change MoM] <= 0, "#27AE60", "#C0392B" )
+		displayFolder: Visual Formatting
+		lineageTag: 0143d80d-aa7d-4af0-8da7-4db811ea17b4
+
+	/// Dynamic Title: Report title that updates based on selected filters
+	measure 'Dynamic Title' =
+			
+			VAR SelectedPlan = SELECTEDVALUE ( Dim_Customers[Plan Type], "All Plans" )
+			VAR SelectedTier = SELECTEDVALUE ( Dim_Customers[Product Tier], "All Tiers" )
+			RETURN
+			    "SaaS Subscription Analytics — " & SelectedPlan & " | " & SelectedTier
+		displayFolder: Visual Formatting
+		lineageTag: 8afba18f-0893-456d-9fa4-44168a5cfe6d
+
+	/// Churn KPI Status: Color-coded status of churn rate (Healthy/Warning/Critical)
+	measure 'Churn KPI Status' =
+			
+			SWITCH (
+			    TRUE(),
+			    [Churn Rate] >= 0.25, "⚠ Critical — Above 25%",
+			    [Churn Rate] >= 0.15, "⚡ Warning — 15% to 25%",
+			    "✅ Healthy — Below 15%"
+			)
+		displayFolder: Visual Formatting
+		lineageTag: 6c45d899-956f-4129-a48f-ccaf5747eb20
+
+	/// Avg MRR Churned Customer: Average MRR of churned customers
+	measure 'Avg MRR Churned Customer' =
+			
+			CALCULATE (
+			    AVERAGE ( Fact_Subscriptions[MRR] ),
+			    Fact_Subscriptions[Churn Flag] = 1
+			)
+		displayFolder: LTV
+		lineageTag: 87d44cbc-4fe1-454b-aa9d-44e79b787dc9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// New Customers: Customers with tenure of 6 months or less
+	measure 'New Customers' =
+			
+			CALCULATE (
+			    COUNTROWS ( Fact_Subscriptions ),
+			    Fact_Subscriptions[Tenure Months] <= 6
+			)
+		formatString: #,0
+		displayFolder: Customers
+		lineageTag: 2a38ff0c-bd4b-447c-a99b-b16e2f18b8a0
+
+	/// High Risk Customers: Active monthly customers with low feature adoption (at risk of churning)
+	measure 'High Risk Customers' =
+			
+			// High Risk Customers = Active monthly customers with low feature adoption
+			// These customers are at higher risk of churning due to disengagement
+			CALCULATE (
+			    COUNTROWS ( Fact_Subscriptions ),
+			    Fact_Subscriptions[Churn Flag] = 0,
+			    Dim_Customers[Plan Type] = "Monthly Plan",
+			    Fact_Subscriptions[Feature Adoption Count] <= 1
+			)
+		formatString: #,0
+		displayFolder: Customers
+		lineageTag: 65e5c700-662a-44da-9b5e-00a4777fb81a
+
+	/// Top Plan by MRR: The plan type generating the highest MRR
+	measure 'Top Plan by MRR' =
+			
+			CALCULATE (
+			    SELECTEDVALUE ( Dim_Customers[Plan Type] ),
+			    TOPN (
+			        1,
+			        SUMMARIZE (
+			            Fact_Subscriptions,
+			            Dim_Customers[Plan Type],
+			            "Plan MRR", [Total MRR]
+			        ),
+			        [Plan MRR],
+			        DESC
+			    )
+			)
+		displayFolder: Visual Formatting
+		lineageTag: 51183d00-a067-4731-a04e-b3a15d29df93
+
+	/// Retention Rate by Tenure Segment: Active customers divided by total customers within the current filter context (tenure segment / plan). Snapshot metric, not longitudinal cohort retention.
+	measure 'Retention Rate by Tenure Segment' =
+			
+			// Retention Rate by Tenure Segment: % of customers in the current
+			// filter context (tenure segment / plan) who are still active
+			VAR TotalInSegment = COUNTROWS ( Fact_Subscriptions )
+			VAR ActiveInSegment =
+			    CALCULATE (
+			        COUNTROWS ( Fact_Subscriptions ),
+			        Fact_Subscriptions[Churn Flag] = 0
+			    )
+			RETURN
+			    IF ( TotalInSegment > 0, DIVIDE ( ActiveInSegment, TotalInSegment, 0 ), BLANK () )
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Rates
+		lineageTag: 7fed0343-e15a-4394-8366-a52382907794
+
+	/// Last Refresh Date: Date of the most recent data refresh
+	measure 'Last Refresh Date' =
+			
+			"Data as of: " & FORMAT ( MAX ( Dim_Date[Date] ), "DD MMM YYYY" )
+		lineageTag: f46e30c8-57ab-4a87-865a-30808ec23503
+
+	column Value
+		isHidden
+		formatString: 0
+		lineageTag: c3fce82c-7543-4d86-9805-686fcef6d7db
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Measures = calculated
+		mode: import
+		source = {1}
+
+	annotation PBI_Id = 0721fc340c014c8cb995e56231b1dc75
+

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "a8e8e71baab900fc9ac2",
+  "displayName": "Retention & Cohort",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "747c153d10c5d5bbd63c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Dim_Customers"
+              }
+            },
+            "Property": "Plan Type"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "4045b75fad27a346a7b6",
+    "type": "Drillthrough",
+    "parameters": [
+      {
+        "name": "14a9b7e99902d7b499ac",
+        "boundFilter": "747c153d10c5d5bbd63c",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Dim_Customers"
+              }
+            },
+            "Property": "Plan Type"
+          }
+        }
+      }
+    ]
+  },
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          },
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#0D1117'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "0b1702909c412d0660a1",
+      "target": "e8a99d7ad5de111a7ed7",
+      "type": "DataFilter"
+    },
+    {
+      "source": "0b1702909c412d0660a1",
+      "target": "c532313c97236aa9749e",
+      "type": "DataFilter"
+    }
+  ]
+}

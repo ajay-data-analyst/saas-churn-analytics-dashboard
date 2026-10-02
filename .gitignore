@@ -1,0 +1,16 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+
+# Claude local session files
+.claude/
+
+# Power BI local cache artifacts
+powerbi/**/*.pbi
+powerbi/SaaS_Churn_Dashboard.Report/.pbi/
+powerbi/SaaS_Churn_Dashboard.SemanticModel/.pbi/
+
+# Local-only scratch
+*.tmp
+*~

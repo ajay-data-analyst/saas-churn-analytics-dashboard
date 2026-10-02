@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "SaaS_Churn_Dashboard"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "6bd9a0b6-7b16-4391-8c94-785aa2ea5f5a"
+  }
+}
